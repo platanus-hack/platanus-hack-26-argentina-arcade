@@ -12,12 +12,15 @@ const COLORS = {
   frame: 0x3a3a0a,
   accent: 0xe1ff00,
   accentSoft: 0xa8c700,
-  cyan: 0xe1ff00,
-  pink: 0xff6ec7,
-  green: 0xe1ff00,
+  p1: 0xe1ff00,
+  p2: 0xff6ec7,
   red: 0xff7a7a,
   white: 0xf7ffd8,
   slate: 0xb8c48d,
+  cell: 0x1a1e05,
+  overlay: 0x0c0e02,
+  backdrop: 0x030504,
+  fieldBg: 0x0a0d0b,
   brickA: 0x3f4a0e,
   brickB: 0x6b7f14,
   brickC: 0xa8c700,
@@ -54,9 +57,7 @@ const CABINET_KEYS = {
   P2_5: 'g',
   P2_6: 'h',
   START1: 'Enter',
-  COIN1: '1',
   START2: '2',
-  COIN2: '3',
 };
 
 const KEYBOARD_TO_ARCADE = {};
@@ -214,7 +215,7 @@ function createBackground(scene) {
     GAME_HEIGHT / 2,
     700,
     450,
-    0x0a0d0b,
+    COLORS.fieldBg,
     0.18,
   );
 }
@@ -349,7 +350,7 @@ function createPlayfield(scene) {
     topPaddleY,
     paddleWidth,
     paddleHeight,
-    COLORS.cyan,
+    COLORS.p1,
     1,
   );
   scene.playfield.p2Paddle = scene.add.rectangle(
@@ -357,7 +358,7 @@ function createPlayfield(scene) {
     bottomPaddleY,
     paddleWidth,
     paddleHeight,
-    COLORS.pink,
+    COLORS.p2,
     1,
   );
 
@@ -416,7 +417,7 @@ function createEndGameUi(scene) {
     GAME_HEIGHT / 2,
     GAME_WIDTH,
     GAME_HEIGHT,
-    0x030504,
+    COLORS.backdrop,
     0.98,
   );
   scene.endGame.container.add(backdrop);
@@ -493,7 +494,7 @@ function createEndGameUi(scene) {
       const cellX = GAME_WIDTH / 2 - rowWidth / 2 + 28 + col * 56;
       const cellY = 430 + row * 28;
 
-      const cell = scene.add.rectangle(cellX, cellY, value.length > 1 ? 64 : 42, 24, 0x1a1e05, 0.95);
+      const cell = scene.add.rectangle(cellX, cellY, value.length > 1 ? 64 : 42, 24, COLORS.cell, 0.95);
       cell.setStrokeStyle(2, COLORS.frame, 0.8);
 
       const label = scene.add
@@ -604,7 +605,7 @@ function createStartScreen(scene) {
   c.setDepth(15);
   scene.startScreen.container = c;
 
-  c.add(scene.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x0c0e02, 0.97));
+  c.add(scene.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, COLORS.overlay, 0.97));
 
   c.add(
     scene.add
@@ -633,7 +634,7 @@ function createStartScreen(scene) {
   const buttonLabels = ['PLAY', 'LEADERBOARD', 'CONTROLS'];
   for (let i = 0; i < buttonLabels.length; i += 1) {
     const y = 232 + i * 50;
-    const bg = scene.add.rectangle(GAME_WIDTH / 2, y, 280, 42, 0x1a1e05, 0.95);
+    const bg = scene.add.rectangle(GAME_WIDTH / 2, y, 280, 42, COLORS.cell, 0.95);
     bg.setStrokeStyle(2, COLORS.frame, 0.8);
     const label = scene.add
       .text(GAME_WIDTH / 2, y, buttonLabels[i], {
@@ -684,7 +685,7 @@ function createLeaderboardScreen(scene) {
   c.setDepth(16);
   scene.leaderScreen.container = c;
 
-  c.add(scene.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x0c0e02, 0.98));
+  c.add(scene.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, COLORS.overlay, 0.98));
   c.add(
     scene.add
       .text(GAME_WIDTH / 2, 90, 'LEADERBOARD', {
@@ -718,7 +719,7 @@ function createControlsScreen(scene) {
   c.setDepth(16);
   scene.controlsScreen.container = c;
 
-  c.add(scene.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x0c0e02, 0.98));
+  c.add(scene.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, COLORS.overlay, 0.98));
   c.add(
     scene.add
       .text(GAME_WIDTH / 2, 110, 'CONTROLS', {
@@ -787,7 +788,7 @@ function updateStartMenuHighlight(scene) {
   const cursor = scene.state.menu.cursor;
   scene.startScreen.buttons.forEach(({ bg, label }, i) => {
     const active = i === cursor;
-    bg.setFillStyle(active ? COLORS.accent : 0x1a1e05, active ? 1 : 0.95);
+    bg.setFillStyle(active ? COLORS.accent : COLORS.cell, active ? 1 : 0.95);
     bg.setStrokeStyle(2, active ? COLORS.white : COLORS.frame, active ? 1 : 0.8);
     label.setColor(active ? '#04110b' : '#f7ffd8');
   });
@@ -828,7 +829,7 @@ function createPauseScreen(scene) {
   c.setDepth(25);
   scene.pauseScreen.container = c;
 
-  c.add(scene.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x0c0e02, 0.82));
+  c.add(scene.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, COLORS.overlay, 0.82));
   c.add(
     scene.add
       .text(GAME_WIDTH / 2, GAME_HEIGHT / 2 - 28, 'PAUSED', {
@@ -993,7 +994,7 @@ function buildTextBricks(scene) {
 
   for (const [bx, by, ci] of brickData) {
     const brick = scene.add.rectangle(bx, by, 18, 10, colors[ci], 1);
-    brick.setStrokeStyle(1, 0x1a1e05, 0.7);
+    brick.setStrokeStyle(1, COLORS.cell, 0.7);
     scene.physics.add.existing(brick, true);
     scene.playfield.bricks.add(brick);
   }
@@ -1092,7 +1093,7 @@ function tryStartDash(scene, playerKey, buttonCode, dir, time, duration, cooldow
 function spawnDashTrail(scene, playerKey, dir) {
   const paddle =
     playerKey === 'p1' ? scene.playfield.p1Paddle : scene.playfield.p2Paddle;
-  const color = playerKey === 'p1' ? 0xe1ff00 : 0xff6ec7;
+  const color = playerKey === 'p1' ? COLORS.p1 : COLORS.p2;
   const trail = scene.add.rectangle(paddle.x, paddle.y, paddle.width, paddle.height, color, 0.6);
   scene.tweens.add({
     targets: trail,
@@ -1183,7 +1184,7 @@ function updateBallTrails(scene, time) {
 
 function handleBallPaddleCollision(scene, ball, paddle, playerKey) {
   ball.lastTouchedBy = playerKey;
-  const ballColor = playerKey === 'p1' ? COLORS.cyan : COLORS.pink;
+  const ballColor = playerKey === 'p1' ? COLORS.p1 : COLORS.p2;
   ball.setFillStyle(ballColor);
   ball.glowColor = ballColor;
 
@@ -1627,7 +1628,7 @@ function updateLetterGridHighlight(scene) {
   const entry = scene.state.nameEntry;
   for (const item of scene.endGame.gridLabels) {
     const active = item.row === entry.row && item.col === entry.col;
-    item.cell.setFillStyle(active ? COLORS.accent : 0x1a1e05, active ? 1 : 0.95);
+    item.cell.setFillStyle(active ? COLORS.accent : COLORS.cell, active ? 1 : 0.95);
     item.cell.setStrokeStyle(2, active ? COLORS.white : COLORS.frame, active ? 1 : 0.8);
     item.label.setColor(active ? '#04110b' : '#f7ffd8');
   }
@@ -1775,10 +1776,7 @@ function getStorage() {
     async set(key, value) {
       window.localStorage.setItem(key, JSON.stringify(value));
     },
-    async remove(key) {
-      window.localStorage.removeItem(key);
-    },
-  };
+};
 }
 
 async function storageGet(key) {
@@ -1787,8 +1785,4 @@ async function storageGet(key) {
 
 async function storageSet(key, value) {
   return getStorage().set(key, value);
-}
-
-async function storageRemove(key) {
-  return getStorage().remove(key);
 }
