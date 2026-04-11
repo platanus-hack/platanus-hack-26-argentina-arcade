@@ -9,8 +9,6 @@
   },
   "devDependencies": {
     "@platanus/arcade-dev-ui-26": "latest",
-    "@types/node": "^22.10.5",
-    "typescript": "^5.7.2",
     "vite": "^7.1.12"
   }
 }

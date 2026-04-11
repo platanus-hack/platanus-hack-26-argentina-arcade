@@ -164,7 +164,7 @@ function update(time, delta) {
   }
 
   if (phase === 'leaderboard') {
-    if (consumeAnyPressedControl(scene, ['START1', 'START2', 'P1_2', 'P2_2'])) {
+    if (consumeAnyPressedControl(scene, ['START1', 'START2', 'P1_1', 'P2_1', 'P1_2', 'P2_2'])) {
       scene.leaderScreen.container.setVisible(false);
       showStartScreen(scene);
     }
@@ -172,7 +172,7 @@ function update(time, delta) {
   }
 
   if (phase === 'controls') {
-    if (consumeAnyPressedControl(scene, ['START1', 'START2', 'P1_2', 'P2_2'])) {
+    if (consumeAnyPressedControl(scene, ['START1', 'START2', 'P1_1', 'P2_1', 'P1_2', 'P2_2'])) {
       scene.controlsScreen.container.setVisible(false);
       showStartScreen(scene);
     }
@@ -203,7 +203,7 @@ function update(time, delta) {
   }
 
   if (phase === 'saved') {
-    if (consumeAnyPressedControl(scene, ['START1', 'START2', 'P1_2', 'P2_2'])) {
+    if (consumeAnyPressedControl(scene, ['START1', 'START2', 'P1_1', 'P2_1', 'P1_2', 'P2_2'])) {
       returnToStart(scene);
     }
   }
@@ -810,7 +810,7 @@ function handleStartMenu(scene, time) {
     menu.lastAxis = axisY;
   }
 
-  if (consumeAnyPressedControl(scene, ['P1_2', 'P2_2', 'START1', 'START2'])) {
+  if (consumeAnyPressedControl(scene, ['P1_1', 'P2_1', 'P1_2', 'P2_2', 'START1', 'START2'])) {
     playSound(scene, 'select');
     startAmbientMusic(scene);
     if (menu.cursor === 0) {
@@ -1552,7 +1552,7 @@ function handleNameEntry(scene, time) {
 
   if (
     time >= entry.confirmCooldownUntil &&
-    consumeAnyPressedControl(scene, ['P1_2', 'P2_2', 'START1', 'START2'])
+    consumeAnyPressedControl(scene, ['P1_1', 'P2_1', 'P1_2', 'P2_2', 'START1', 'START2'])
   ) {
     entry.confirmCooldownUntil = time + 180;
     playSound(scene, 'select');

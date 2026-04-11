@@ -10,7 +10,7 @@ Create an engaging, fun arcade game in **game.js** using **Phaser 3** (v3.87.0) 
 
 **ONLY edit these three files:**
 - `game.js` - Your game code
-- `metadata.json` - Game name and description
+- `metadata.json` - Game name, description, and player mode
 - `cover.png` - Game cover image (800x600 pixels)
 
 **DO NOT edit any other files** (including index.html, check-restrictions files, config files, etc.)
@@ -33,7 +33,7 @@ Create an engaging, fun arcade game in **game.js** using **Phaser 3** (v3.87.0) 
 ## Development Workflow
 
 1. **Edit game.js**: Write your game code in this single file
-2. **Update metadata.json**: Set `game_name` and `description`
+2. **Update metadata.json**: Set `game_name`, `description`, and `player_mode` (`single_player` or `two_player`)
 3. **Create cover.png**: Design an 800x600 pixel cover image for your game
 4. **Check restrictions**: Run `npm run check-restrictions` frequently
 5. **DO NOT start dev servers**: The user will handle running `npm run dev` - do not run it yourself
@@ -104,7 +104,7 @@ function update() {
 - Use Phaser's built-in features (sprites, physics, tweens, etc.)
 - Test in the development server to ensure sandbox compatibility
 - Keep code readable - minification happens automatically
-- **Controls**: Keep controls simple (arrow keys, WASD, spacebar, etc.) - they will be mapped to an arcade controller
+- **Controls**: Keep controls simple (joystick + a few buttons). **Do NOT modify the `CABINET_KEYS` mapping in game.js** — it matches the physical arcade cabinet wiring. Changing it will break your game on the real machine. Use the arcade codes (`P1_U`, `P1_1`, etc.) in your game logic instead of raw keyboard keys
 - **Storage**: Use `window.platanusArcadeStorage` for persistence (get/set/remove). Storage persists across releases, so always validate data read from storage before using it — the format may have changed between versions
 
 ## Best Practices
