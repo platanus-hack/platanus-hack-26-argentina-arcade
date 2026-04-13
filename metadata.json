@@ -1,5 +1,5 @@
 {
-  "game_name": "<FILL THIS>",
-  "description": "<FILL THIS>",
-  "player_mode": "single_player"
+  "game_name": "WORD BREAKER",
+  "description": "Two-player brick duel! Smash letter bricks to spell a secret word before your rival does. Use your paddle to dash, deflect and destroy. First to crack the code wins.",
+  "player_mode": "two_player"
 }
