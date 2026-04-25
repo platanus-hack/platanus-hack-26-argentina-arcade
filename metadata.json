@@ -1,5 +1,5 @@
 {
-  "game_name": "<FILL THIS>",
-  "description": "<FILL THIS>",
-  "player_mode": "two_player"
+  "game_name": "Croma Dash",
+  "description": "Fast arcade action runner. Dash, shoot, swap weapons, survive escalating chromatic zones, and defeat neon bosses.",
+  "player_mode": "single_player"
 }
