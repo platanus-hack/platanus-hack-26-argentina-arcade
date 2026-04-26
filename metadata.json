@@ -1,5 +1,5 @@
 {
-  "game_name": "<FILL THIS>",
-  "description": "<FILL THIS>",
+  "game_name": "Hot Deploy",
+  "description": "Fork Burger vs Taco Stack. Sirve el pedido correcto antes de que el auto se vaya. Drive-thru arcade para 1 o 2 jugadores.",
   "player_mode": "two_player"
 }
